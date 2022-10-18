@@ -57,12 +57,12 @@ namespace Finbourne.Caching.Test
         {
             var cacheManager = new CacheManager<int, string>(2);
 
-            cacheManager.AddOrUpdate(1, "1");
-            cacheManager.AddOrUpdate(2, "2");
+            cacheManager.AddOrUpdate(1, "");
+            cacheManager.AddOrUpdate(2, "");
             Assert.IsTrue(cacheManager.TryGetValue(1, out _));      // 1 was accessed ...
-            cacheManager.AddOrUpdate(3, "3");                       // ... so when we do this then 2 should be evicted, not 1
+            cacheManager.AddOrUpdate(3, "");                       // ... so when we do this then 2 should be evicted, not 1
             Assert.IsTrue(cacheManager.TryGetValue(1, out _));      // Should still have 1
-            Assert.IsFalse(cacheManager.TryGetValue(2, out _));     // 1 was evicted when we add 2
+            Assert.IsFalse(cacheManager.TryGetValue(2, out _));     // 1 was evicted when we add 3
             Assert.IsTrue(cacheManager.TryGetValue(3, out _));      // Should still have 3
         }
 
@@ -71,7 +71,7 @@ namespace Finbourne.Caching.Test
         {
             var cacheManager = new CacheManager<int, string>();
 
-            cacheManager.AddOrUpdate(1, "1");
+            cacheManager.AddOrUpdate(1, "");
             cacheManager.Remove(1);
             Assert.IsFalse(cacheManager.TryGetValue(1, out _));
         }
