@@ -63,7 +63,7 @@ namespace Finbourne.Caching.Test
             cacheManager.AddOrUpdate(3, "3");                       // ... so when we do this then 2 should be evicted, not 1
             Assert.IsTrue(cacheManager.TryGetValue(1, out _));      // Should still have 1
             Assert.IsFalse(cacheManager.TryGetValue(2, out _));     // 1 was evicted when we add 2
-            Assert.IsTrue(cacheManager.TryGetValue(1, out _));      // Should still have 3
+            Assert.IsTrue(cacheManager.TryGetValue(3, out _));      // Should still have 3
         }
 
         [TestMethod]
